@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pyday_calendar'
+    'pyday_calendar',
+    'pyday_social_network',
 ]
 
 MIDDLEWARE_CLASSES = [

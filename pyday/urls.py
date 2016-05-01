@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^calendar/', include('pyday_calendar.urls'))
+    url(r'^calendar/', include('pyday_calendar.urls')),
+    url(r'^social/', include('pyday_social_network.urls'))
 ]
