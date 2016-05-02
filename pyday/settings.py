@@ -124,5 +124,12 @@ STATIC_URL = '/static/'
 
 # добавям си тук...
 
+# Media (за снимките и аудиофайловете)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+# Authentication (имам custom users)
+AUTH_USER_MODEL = 'pyday_social_network.PyDayUser'
+AUTHENTICATION_BACKENDS = (
+    'custom_user.pyday_user_authenticate.PyDayUserAuth',)
