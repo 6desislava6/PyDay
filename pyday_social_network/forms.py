@@ -8,13 +8,6 @@ class UploadPictureForm(forms.Form):
     )
 
 
-'''class RegisterUserForm(forms.Form):
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=30)
-    email = forms.CharField(max_length=120)
-'''
-
-
 class RegisterUserForm(forms.ModelForm):
     class Meta:
         model = PyDayUser
@@ -23,8 +16,18 @@ class RegisterUserForm(forms.ModelForm):
 
 
 class LoginUserForm(forms.Form):
+    required_css_class = 'required'
     email = forms.CharField(max_length=120)
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput())
+
+
+'''class PyDayUserCreationForm(UserCreationForm):
+
+    def __init__(self, *args, **kargs):
+        super(PyDayUserCreationForm, self).__init__(*args, **kargs)
+        #del self.fields['username']
 
     class Meta:
-        widgets = {'password': forms.PasswordInput()}
+        model = PyDayUser
+        fields = ['first_name', 'last_name', 'email']
+        widgets = {'password': forms.PasswordInput()}'''

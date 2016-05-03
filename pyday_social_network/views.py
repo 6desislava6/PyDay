@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from pyday_social_network.forms import UploadPictureForm
+from pyday_social_network.forms import UploadPictureForm, LoginUserForm
 from django.core.exceptions import ValidationError
 from pyday_social_network.services import RegisterUserUtilities
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
 from django.contrib import auth
@@ -39,17 +39,24 @@ def register_login_user(request):
 
 @require_POST
 def login_user(request):
-    email = request.POST.get('email', '')
-    password = request.POST.get('password', '')
-    user = auth.authenticate(email=email, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return HttpResponseRedirect('/main')
+    form = LoginUserForm(data=request.POST)
+    # A  Form instance has an is_valid() method, which runs validation
+    # routines for all its fields. When this method is called, if all fields
+    # contain valid data, it will
+    # place the form’s data in its cleaned_data attribute.
+    if form.is_valid():
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+        user = authenticate(email=email, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse())
+            else:
+                return HttpResponse('активирайте акаунта си')
         else:
-            return HttpResponse('disabled account')
-    else:
-        return HttpResponse(password)
+            return HttpResponse("Невалидни email и/или парола")
+    return HttpResponse('невалидна форма')
 
 
 def main(request):
