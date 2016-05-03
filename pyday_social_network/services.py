@@ -1,5 +1,6 @@
 from pyday_social_network.forms import RegisterUserForm, LoginUserForm
 from pyday_social_network.models import PyDayUser
+from django.http import HttpResponseRedirect
 
 
 class RegisterUserUtilities:
@@ -17,3 +18,12 @@ class RegisterUserUtilities:
                 'form_register': RegisterUserForm(),
                 'form_login': LoginUserForm()}
 
+
+def anonymous_required(redirect_to=None):
+    def inner_decorator(func):
+        def decorated(request, *args, **kwargs):
+            if request.user is not None and request.user.is_authenticated():
+                return HttpResponseRedirect(redirect_to)
+            return func(request, *args, **kwargs)
+        return decorated
+    return inner_decorator

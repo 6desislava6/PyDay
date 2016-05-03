@@ -135,3 +135,6 @@ AUTHENTICATION_BACKENDS = ('pyday_social_network.backends.PyDayUserAuth', )
 
 GENERIC_PROFILE_PIC = os.path.join(MEDIA_URL, 'pictures',
                                    'generic_profile_photo.png')
+
+LOGIN_URL = '/social/register/'
+LOGIN_REDIRECT_URL = '/social/register/'
