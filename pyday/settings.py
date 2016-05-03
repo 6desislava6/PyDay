@@ -131,5 +131,7 @@ MEDIA_URL = '/media/'
 
 # Authentication (имам custom users)
 AUTH_USER_MODEL = 'pyday_social_network.PyDayUser'
-AUTHENTICATION_BACKENDS = (
-    'custom_user.pyday_user_authenticate.PyDayUserAuth',)
+AUTHENTICATION_BACKENDS = ('pyday_social_network.backends.PyDayUserAuth', )
+
+GENERIC_PROFILE_PIC = os.path.join(MEDIA_URL, 'pictures',
+                                   'generic_profile_photo.png')
