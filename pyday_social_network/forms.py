@@ -8,6 +8,12 @@ class UploadPictureForm(forms.Form):
     )
 
 
+class UploadSongForm(forms.Form):
+    song = forms.FileField(
+        label='Upload a song',
+    )
+
+
 class RegisterUserForm(forms.ModelForm):
     class Meta:
         model = PyDayUser

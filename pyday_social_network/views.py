@@ -1,27 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from pyday_social_network.forms import UploadPictureForm, LoginUserForm
+from pyday_social_network.forms import UploadPictureForm, LoginUserForm, UploadSongForm
 from django.core.exceptions import ValidationError
-from pyday_social_network.services import RegisterUserUtilities
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 # from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from pyday_social_network.services import anonymous_required
+from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, give_all_users
 
 
 @anonymous_required(redirect_to='/social/main')
 def register_login_user(request):
     if request.method == 'POST':
         try:
-            if RegisterUserUtilities.register_user_post(request):
+            if register_user_post(request):
                 return HttpResponse('стаа!')
             return HttpResponse('невалидна форма')
         except ValidationError:
             return HttpResponse('невалиден мейл, бре')
     else:
-        data_get = RegisterUserUtilities.register_user_get(request)
+        data_get = register_user_get(request)
         return render(request, 'register_user.html', data_get)
 
 
@@ -40,18 +39,27 @@ def upload_picture(request):
         return render(request, 'upload_picture.html', {'form': form})
 
 
-# A  Form instance has an is_valid() method, which runs validation
-# routines for all its fields. When this method is called, if all fields
-# contain valid data, it will
-# place the form’s data in its cleaned_data attribute.
+@login_required
+def upload_song(request):
+    if request.method == 'POST':
+        form = UploadSongForm(request.POST, request.FILES)
+        if form.is_valid():
+            make_song(request.user, form)
+            return HttpResponse('стаа!')
+        else:
+            return HttpResponse('не стаа')
+    else:
+        form = UploadSongForm()
+        return render(request, 'upload_song.html', {'form': form})
+
+
 @require_POST
 def login_user(request):
     form = LoginUserForm(data=request.POST)
 
     if form.is_valid():
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-        user = authenticate(email=email, password=password)
+        form = form.cleaned_data
+        user = authenticate(email=form['email'], password=form['password'])
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -72,3 +80,7 @@ def main(request):
 def logout_user(request):
     logout(request)
     return HttpResponse('Youve logged out')
+
+
+def display_all_users(request):
+    return render(request, 'all_users.html', {'users': give_all_users()})

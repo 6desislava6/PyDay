@@ -42,5 +42,11 @@ class PyDayUser(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-
     objects = PyDayManager()
+
+
+# many to one
+# A user has many songs
+class Song(models.Model):
+    owner = models.ForeignKey('PyDayUser', on_delete=models.CASCADE)
+    song = models.FileField(upload_to='songs/')

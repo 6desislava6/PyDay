@@ -116,18 +116,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+# добавям си тук...
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
 
-# добавям си тук...
-
 # Media (за снимките и аудиофайловете)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
 
 # Authentication (имам custom users)
 AUTH_USER_MODEL = 'pyday_social_network.PyDayUser'
@@ -136,5 +134,6 @@ AUTHENTICATION_BACKENDS = ('pyday_social_network.backends.PyDayUserAuth', )
 GENERIC_PROFILE_PIC = os.path.join(MEDIA_URL, 'pictures',
                                    'generic_profile_photo.png')
 
+# за redirect-ване
 LOGIN_URL = '/social/register/'
 LOGIN_REDIRECT_URL = '/social/register/'
