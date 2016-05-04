@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 # from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, give_all_users
+from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, give_all_users, map_users_follows, return_user
 
 
 @anonymous_required(redirect_to='/social/main')
@@ -73,7 +73,9 @@ def login_user(request):
 
 @login_required
 def main(request):
-    return render(request, 'main.html', {'user': request.user})
+    following = request.user.following
+    followers = request.user.followers
+    return render(request, 'main.html', {'user': request.user, 'followers': followers, 'following': following})
 
 
 @login_required
@@ -82,5 +84,50 @@ def logout_user(request):
     return HttpResponse('Youve logged out')
 
 
+@login_required
 def display_all_users(request):
-    return render(request, 'all_users.html', {'users': give_all_users()})
+    users = give_all_users()
+    users_mapped = map_users_follows(request.user, users)
+    return render(request, 'all_users.html', {'users': users_mapped})
+
+
+@login_required
+def display_following(request):
+    users_mapped = map_users_follows(request.user, request.user.following)
+    return render(request, 'all_users.html', {'users': users_mapped})
+
+
+@login_required
+def display_followers(request):
+    users_mapped = map_users_follows(request.user, request.user.followers)
+    return render(request, 'all_users.html', {'users': users_mapped})
+
+
+@login_required
+def display_friends(request):
+    users_mapped = map_users_follows(request.user, request.user.friends)
+    return render(request, 'all_users.html', {'users': users_mapped})
+
+
+@login_required
+def follow(request, user):
+    success, user = request.user.follow(user)
+    if not success:
+        return HttpResponse('Youve already followed this user {}'.format(user.email))
+    return HttpResponse('Youve followed {}'.format(user.email))
+
+
+@login_required
+def unfollow(request, user):
+    success, user = request.user.unfollow(user)
+    if not success:
+        return HttpResponse('You dont follow this user {}'.format(user.email))
+    return HttpResponse('Youve unfollowed {}'.format(user.email))
+
+
+@login_required
+def display_profile(request, user):
+    user = return_user(user)
+    following = request.user.following
+    followers = request.user.followers
+    return render(request, 'profile.html', {'user': user, 'followers': followers, 'following': following})

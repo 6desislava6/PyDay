@@ -9,17 +9,3 @@
     {{ form_login }}
     <input type="submit" value="Submit" />
 </form>
-
-{% if users %}
-    <ul>
-    {% for user in users %}
-        <li><a href="{{ user.picture.url }}">{{ user.picture.url }}</a></li>
-        {{user.email}}
-
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No users.</p>
-{% endif %}
-
-{{MEDIA_ROOT}}

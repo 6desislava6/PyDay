@@ -1,6 +1,11 @@
 {% for user in users %}
 <div>
-    <img src="{{ user.picture.url }}" height="250" width="250">
+    <a href="/social/profile/{{ user.0.id }}"><img src="{{ user.0.picture.url }}" height="100" width="100"></a>
     {{ user.first_name }} {{ user.last_name }} {{ user.email }}
+    {% if user.1 %}
+    <a href="/social/unfollow/{{user.0.id}}">unfollow</a>
+    {% else %}
+    <a href="/social/follow/{{user.0.id}}">follow</a>
+    {% endif %}
 </div>
 {% endfor %}

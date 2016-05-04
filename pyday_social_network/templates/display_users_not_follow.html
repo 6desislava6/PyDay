@@ -1,0 +1,6 @@
+{% for user in users %}
+<div>
+    <img src="{{ user.picture.url }}" height="100" width="100">
+    <div>{{ user.first_name }} {{ user.last_name }}</div>
+</div>
+{% endfor %}
