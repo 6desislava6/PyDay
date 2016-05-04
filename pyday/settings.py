@@ -137,3 +137,7 @@ GENERIC_PROFILE_PIC = os.path.join(MEDIA_URL, 'pictures',
 # за redirect-ване
 LOGIN_URL = '/social/register/'
 LOGIN_REDIRECT_URL = '/social/register/'
+
+
+# for the app
+IMPORATNCE_CHOICES = ['not_important_at_all', 'should_be_done', 'midly_important', 'important', 'very_important', 'extremely_important']
