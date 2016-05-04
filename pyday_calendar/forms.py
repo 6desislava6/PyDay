@@ -1,5 +1,5 @@
 from django import forms
-from pyday_calendar import Event
+from pyday_calendar.models import Event
 
 
 class CreateEventForm(forms.ModelForm):

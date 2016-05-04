@@ -140,4 +140,12 @@ LOGIN_REDIRECT_URL = '/social/register/'
 
 
 # for the app
-IMPORATNCE_CHOICES = ['not_important_at_all', 'should_be_done', 'midly_important', 'important', 'very_important', 'extremely_important']
+
+IMPORTANCE_CHOICES = (
+    ('NO', 'not important'),
+    ('SH', 'should be done'),
+    ('MI', 'midly important'),
+    ('I', 'important'),
+    ('VI', 'very important'),
+    ('EI', 'extremely important'),
+)

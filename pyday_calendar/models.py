@@ -1,5 +1,5 @@
 from django.db import models
-from pyday.settings import IMPORATNCE_CHOICES
+from pyday.settings import IMPORTANCE_CHOICES
 from pyday_social_network.models import PyDayUser
 from django.contrib.auth.models import BaseUserManager
 
@@ -14,7 +14,7 @@ class EventManager(BaseUserManager):
 
 
 class Event(models.Model):
-    owner = models.ForeignKey('PyDayUser', on_delete=models.CASCADE)
+    owner = models.ForeignKey('pyday_social_network.PyDayUser', on_delete=models.CASCADE)
     date = models.DateField()
     year = models.IntegerField()
     month = models.IntegerField()
@@ -22,8 +22,8 @@ class Event(models.Model):
     from_time = models.TimeField()
     to_time = models.TimeField()
     caption = models.TextField(blank=True)
-    importance = models.CharField(choices=IMPORATNCE_CHOICES, default='1')
-    coordinates = models.CharField(blank=True)
+    importance = models.CharField(max_length=20, choices=IMPORTANCE_CHOICES, default='1')
+    coordinates = models.CharField(max_length=60, blank=True)
     objects = EventManager()
 
     @property

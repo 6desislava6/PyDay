@@ -1,0 +1,5 @@
+<form enctype="multipart/form-data" action="/calendar/create_event/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
