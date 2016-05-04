@@ -1,0 +1,26 @@
+{% load staticfiles %}
+  <head>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+    $(document).ready(
+
+      /* This is the function that will get executed after the DOM is fully loaded */
+      function () {
+        $( "#datepicker" ).datepicker({
+          changeMonth: true,//this option for allowing user to select month
+          changeYear: true //this option for allowing user to select from year range
+        });
+      }
+
+    );
+    </script>
+    <link rel="stylesheet" href="runnable.css" />
+  </head>
+<form enctype="multipart/form-data" action="/calendar/create_event/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>

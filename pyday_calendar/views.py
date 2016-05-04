@@ -18,4 +18,4 @@ def create_event(request):
             return HttpResponse('не стаа')
     else:
         form = CreateEventForm()
-        return render(request, 'upload_picture.html', {'form': form})
+        return render(request, 'create_event.html', {'form': form})

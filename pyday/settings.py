@@ -149,3 +149,10 @@ IMPORTANCE_CHOICES = (
     ('VI', 'very important'),
     ('EI', 'extremely important'),
 )
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'pyday_calendar/static/'),
+    os.path.join(BASE_DIR, 'static/'),
+)

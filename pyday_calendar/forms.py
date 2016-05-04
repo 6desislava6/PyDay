@@ -7,3 +7,6 @@ class CreateEventForm(forms.ModelForm):
         model = Event
         # TODO - координатите
         fields = ['date', 'from_time', 'to_time', 'caption', 'importance']
+        widgets = {'date': forms.DateInput(attrs={'id': 'datepicker'})}
+
+# или SelectDateWidget
