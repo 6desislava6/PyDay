@@ -24,3 +24,9 @@ https://www.raspberrypi.org/forums/viewtopic.php?t=39569&p=325731
 raspberyy
 ssh pi@10.42.0.136
 
+GPIOS:
+1. Vcc -> Pin2
+2. GND -> Pin6
+3. DIN - Data in -> GPIO 10 (MOSI)
+4. CS - Chip Select -> GPIO 8(SPI CSO)
+5. CLK Clock -> GPIO 11(SPI CLK)
