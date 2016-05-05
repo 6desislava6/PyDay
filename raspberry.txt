@@ -1,0 +1,26 @@
+https://www.raspberrypi.org/blog/pi-matrix/
+
+http://tutorials-raspberrypi.com/library-installation-for-multiline-m-x-n-max7219-led-matrices/
+
+https://github.com/rm-hull/max7219
+
+SPI:
+http://www.raspberrypi-spy.co.uk/2014/08/enabling-the-spi-interface-on-the-raspberry-pi/
+
+drivers:
+https://github.com/rm-hull/max7219
+
+gcc:
+http://raspberrypi.stackexchange.com/questions/28092/sudo-apt-get-install-python-dev-mirror-error
+
+pydev
+https://www.raspberrypi.org/forums/viewtopic.php?t=39569&p=325731
+
+ssh
+http://www.paramiko.org/
+
+https://www.raspberrypi.org/forums/viewtopic.php?t=39569&p=325731
+
+raspberyy
+ssh pi@10.42.0.136
+
