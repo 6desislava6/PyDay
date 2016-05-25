@@ -30,7 +30,7 @@ pip-delete-this-directory.txt
 .cache
 nosetests.xml
 coverage.xml
-
+/media
 # Translations
 *.mo
 
@@ -49,4 +49,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/*.sqlite3
 *.pyc
- 
+
+md\~$

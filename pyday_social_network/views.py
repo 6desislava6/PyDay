@@ -8,6 +8,8 @@ from django.views.decorators.http import require_POST
 # from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, give_all_users, map_users_follows, return_user
+from django.views.generic import View
+from django.utils.decorators import method_decorator
 
 
 @anonymous_required(redirect_to='/social/main')
@@ -24,9 +26,16 @@ def register_login_user(request):
         return render(request, 'register_user.html', data_get)
 
 
-@login_required
-def upload_picture(request):
-    if request.method == 'POST':
+class UploadView(View):
+    template_name = 'form_template.html'
+
+    @method_decorator(login_required)
+    def get(self, request):
+        form = UploadPictureForm()
+        return render(request, 'upload_picture.html', {'form': form})
+
+    @method_decorator(login_required)
+    def post(self, request):
         form = UploadPictureForm(request.POST, request.FILES)
         if form.is_valid():
             request.user.picture = form.cleaned_data['picture']
@@ -34,9 +43,6 @@ def upload_picture(request):
             return HttpResponse('стаа!')
         else:
             return HttpResponse('не стаа')
-    else:
-        form = UploadPictureForm()
-        return render(request, 'upload_picture.html', {'form': form})
 
 
 @login_required

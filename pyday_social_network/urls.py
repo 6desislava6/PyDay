@@ -5,7 +5,7 @@ from pyday_social_network import views
 
 app_name = 'pyday_social_network'
 urlpatterns = [
-    url(r'^upload_picture/$', views.upload_picture, name='upload_picture'),
+    url(r'^upload_picture/$', views.UploadView.as_view(), name='upload_picture'),
     url(r'^upload_song/$', views.upload_song, name='upload_song'),
     url(r'^register/$', views.register_login_user, name='register-login'),
     url(r'^login/$', views.login_user, name='login'),

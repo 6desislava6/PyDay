@@ -19,3 +19,7 @@ def create_event(request):
     else:
         form = CreateEventForm()
         return render(request, 'create_event.html', {'form': form})
+
+
+#TODO
+# https://docs.djangoproject.com/en/1.9/topics/class-based-views/intro/
