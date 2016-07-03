@@ -1,0 +1,23 @@
+td {
+    width: 300px;
+    border: 1px solid;
+    border-color: #A9A9A9;
+    text-align: center;
+}
+tr, td
+{
+    height: 30px;
+    padding: 0px;
+    margin: 0px;
+}
+table {
+
+   border-spacing: 0;
+}
+.hour {
+    width: 60px;
+    text-align: left;
+    border: 0px;
+    border-bottom: 1px solid;
+    border-color:  #A9A9A9;
+}

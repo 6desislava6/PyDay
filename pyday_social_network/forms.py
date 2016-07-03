@@ -22,6 +22,7 @@ class RegisterUserForm(forms.ModelForm):
 
 
 class LoginUserForm(forms.Form):
+    # this field is required!
     required_css_class = 'required'
     email = forms.CharField(max_length=120)
     password = forms.CharField(widget=forms.PasswordInput())

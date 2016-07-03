@@ -1,87 +1,81 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from pyday_social_network.forms import UploadPictureForm, LoginUserForm, UploadSongForm
+from pyday_social_network.forms import UploadPictureForm, LoginUserForm, UploadSongForm, RegisterUserForm
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 # from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, give_all_users, map_users_follows, return_user
-from django.views.generic import View
+from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, make_picture, give_all_users, map_users_follows, return_user, post_redirect
+from django.views.generic import View, FormView
 from django.utils.decorators import method_decorator
+from pyday.views import UploadView
 
 
-@anonymous_required(redirect_to='/social/main')
-def register_login_user(request):
-    if request.method == 'POST':
+class RegisterView(FormView):
+    template_name = 'register_user.html'
+    form_register_class = RegisterUserForm
+    form_login_class = LoginUserForm
+    success_url = '/register_success/'
+    fail_url = '/register_fail/'
+
+    @method_decorator(anonymous_required(redirect_to='/social/main'))
+    def get(self, request):
+        data_get = register_user_get(request, self.form_register_class, self.form_login_class)
+        return render(request, 'register_user.html', data_get)
+
+    @method_decorator(anonymous_required(redirect_to='/social/main'))
+    def post(self, request):
         try:
-            if register_user_post(request):
+            if register_user_post(request, self.form_register_class):
                 return HttpResponse('стаа!')
             return HttpResponse('невалидна форма')
         except ValidationError:
             return HttpResponse('невалиден мейл, бре')
-    else:
-        data_get = register_user_get(request)
-        return render(request, 'register_user.html', data_get)
 
 
-class UploadView(View):
-    template_name = 'form_template.html'
-
-    @method_decorator(login_required)
-    def get(self, request):
-        form = UploadPictureForm()
-        return render(request, 'upload_picture.html', {'form': form})
-
-    @method_decorator(login_required)
-    def post(self, request):
-        form = UploadPictureForm(request.POST, request.FILES)
-        if form.is_valid():
-            request.user.picture = form.cleaned_data['picture']
-            request.user.save()
-            return HttpResponse('стаа!')
-        else:
-            return HttpResponse('не стаа')
+class UploadPictureView(UploadView):
+    template_name = 'upload_picture.html'
+    form_class = UploadPictureForm
+    post_function = staticmethod(make_picture)
+    success_url = '/social/main'
 
 
-@login_required
-def upload_song(request):
-    if request.method == 'POST':
-        form = UploadSongForm(request.POST, request.FILES)
-        if form.is_valid():
-            make_song(request.user, form)
-            return HttpResponse('стаа!')
-        else:
-            return HttpResponse('не стаа')
-    else:
-        form = UploadSongForm()
-        return render(request, 'upload_song.html', {'form': form})
+class UploadSongView(UploadView):
+    template_name = 'upload_song.html'
+    form_class = UploadSongForm
+    post_function = staticmethod(make_song)
+    success_url = '/social/main'
 
 
+@post_redirect(redirect_to='/social/main')
 @require_POST
 def login_user(request):
     form = LoginUserForm(data=request.POST)
 
-    if form.is_valid():
-        form = form.cleaned_data
-        user = authenticate(email=form['email'], password=form['password'])
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/social/main')
-            else:
-                return HttpResponse('активирайте акаунта си')
-        else:
-            return HttpResponse("Невалидни email и/или парола")
-    return HttpResponse('невалидна форма')
+    if not form.is_valid():
+        return HttpResponse('невалидна форма')
+
+    form = form.cleaned_data
+    user = authenticate(email=form['email'], password=form['password'])
+
+    if user is None:
+        return HttpResponse("Невалидни email и/или парола")
+
+    if user.is_active:
+        login(request, user)
+        return HttpResponseRedirect('/social/main')
+    else:
+        return HttpResponse('активирайте акаунта си')
 
 
 @login_required
 def main(request):
     following = request.user.following
     followers = request.user.followers
-    return render(request, 'main.html', {'user': request.user, 'followers': followers, 'following': following})
+    return render(request, 'main.html', {'user': request.user,
+                                         'followers': followers, 'following': following})
 
 
 @login_required
@@ -136,4 +130,5 @@ def display_profile(request, user):
     user = return_user(user)
     following = request.user.following
     followers = request.user.followers
-    return render(request, 'profile.html', {'user': user, 'followers': followers, 'following': following})
+    return render(request, 'profile.html', {'user': user,
+                  'followers': followers, 'following': following})

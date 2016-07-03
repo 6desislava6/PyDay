@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pyday_calendar',
     'pyday_social_network',
+    'mathfilters',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -156,3 +157,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'pyday_calendar/static/'),
     os.path.join(BASE_DIR, 'static/'),
 )
+
+DAY = 24
+FORMAT_DATE = '%m/%Y'

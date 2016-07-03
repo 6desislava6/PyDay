@@ -1,0 +1,19 @@
+{% load mathfilters %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "pyday_calendar/styles.css" %}">
+<table>
+    {% for hour, hour_events in hourly_events %}
+    <tr>
+    <td class="hour">{{hour}}ч.</td>
+        {% for event in hour_events %}
+            {% if not event %}
+    <td class="notevent"></td>
+            {% elif hour != event.from_time|sub:1 %}
+
+            {% else %}
+    <td class="event" rowspan="{{event.to_time|sub:event.from_time}}">{{event.title}}</td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
