@@ -11,6 +11,7 @@ from pyday_social_network.services import register_user_post, register_user_get,
 from django.views.generic import View, FormView
 from django.utils.decorators import method_decorator
 from pyday.views import UploadView
+from pyday_social_network.models import PyDayUser
 
 
 class RegisterView(FormView):
@@ -22,7 +23,9 @@ class RegisterView(FormView):
 
     @method_decorator(anonymous_required(redirect_to='/social/main'))
     def get(self, request):
-        data_get = register_user_get(request, self.form_register_class, self.form_login_class)
+        data_get = register_user_get(request, self.form_register_class,
+                                     self.form_login_class)
+        data_get['user'] = request.user
         return render(request, 'register_user.html', data_get)
 
     @method_decorator(anonymous_required(redirect_to='/social/main'))
@@ -74,7 +77,7 @@ def login_user(request):
 def main(request):
     following = request.user.following
     followers = request.user.followers
-    return render(request, 'main.html', {'user': request.user,
+    return render(request, 'main.html', {'user_request': request.user,
                                          'followers': followers, 'following': following})
 
 
@@ -88,47 +91,65 @@ def logout_user(request):
 def display_all_users(request):
     users = give_all_users()
     users_mapped = map_users_follows(request.user, users)
-    return render(request, 'all_users.html', {'users': users_mapped})
+    return render(request, 'all_users.html',
+                  {'users': users_mapped, 'user_request': request.user})
 
 
 @login_required
 def display_following(request):
     users_mapped = map_users_follows(request.user, request.user.following)
-    return render(request, 'all_users.html', {'users': users_mapped})
+    return render(request, 'all_users.html',
+                  {'users': users_mapped, 'user_request': request.user})
 
 
 @login_required
 def display_followers(request):
     users_mapped = map_users_follows(request.user, request.user.followers)
-    return render(request, 'all_users.html', {'users': users_mapped})
+    return render(request, 'all_users.html',
+                  {'users': users_mapped, 'user_request': request.user})
 
 
 @login_required
 def display_friends(request):
     users_mapped = map_users_follows(request.user, request.user.friends)
-    return render(request, 'all_users.html', {'users': users_mapped})
+    return render(request, 'all_users.html',
+                  {'users': users_mapped, 'user_request': request.user})
 
 
 @login_required
 def follow(request, user):
     success, user = request.user.follow(user)
     if not success:
-        return HttpResponse('Youve already followed this user {}'.format(user.email))
-    return HttpResponse('Youve followed {}'.format(user.email))
+        return render(request, 'error.html',
+                      {'error': 'Youve already followed this user {}'.format(user.email)})
+    return render(request, 'error.html',
+                  {'error': 'Youve followed {}'.format(user.email)})
 
 
 @login_required
 def unfollow(request, user):
     success, user = request.user.unfollow(user)
     if not success:
-        return HttpResponse('You dont follow this user {}'.format(user.email))
-    return HttpResponse('Youve unfollowed {}'.format(user.email))
+        return render(request, 'error.html',
+                      {'error': 'You dont follow this user {}'.format(user.email)})
+    return render(request, 'error.html',
+                  {'error': 'Youve unfollowed {}'.format(user.email)})
 
 
 @login_required
-def display_profile(request, user):
-    user = return_user(user)
-    following = request.user.following
-    followers = request.user.followers
-    return render(request, 'profile.html', {'user': user,
-                  'followers': followers, 'following': following})
+def display_profile(request, user=None):
+    try:
+        user = return_user(user) if user else request.user
+    except PyDayUser.DoesNotExist:
+        return render(request, 'error.html', {'error': 'User does not exist.'})
+    else:
+        following = request.user.following
+        followers = request.user.followers
+        to_follow_button = user != request.user
+        is_following = request.user.follows(user)
+        return render(request, 'profile.html', {'user': user,
+                                                'user_request':request.user,
+                                                'to_follow_button': to_follow_button,
+                                                'is_following': is_following,
+                                                'followers': followers,
+                                                'following': following})

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PyDay</title>
+    </head>
+
+    <body>
+    <a href="/social/profile/{{user.id}}">{{user_request.first_name}} {{user_request.last_name}}</a>
+    <a href="/social/logout">logout</a>
+    <div id="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    </body>
+</html>
+

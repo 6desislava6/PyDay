@@ -15,9 +15,9 @@ urlpatterns = [
     url(r'^following/$', views.display_following, name='following'),
     url(r'^followers/$', views.display_followers, name='followers'),
     url(r'^friends/$', views.display_friends, name='friends'),
-    url(r'^follow/(?P<user>[0-9]+)$', views.follow, name='follow'),
-    url(r'^unfollow/(?P<user>[0-9]+)$', views.unfollow, name='unfollow'),
-    url(r'^profile/(?P<user>[0-9]+)$', views.display_profile, name='profile'),
+    url(r'^follow/(?P<user>\d+)$', views.follow, name='follow'),
+    url(r'^unfollow/(?P<user>\d+)$', views.unfollow, name='unfollow'),
+    url(r'^profile/(?P<user>\d*)$', views.display_profile, name='profile'),
 ]
 
 urlpatterns += patterns('pyday_social_network.views',

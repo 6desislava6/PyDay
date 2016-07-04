@@ -1,27 +1,75 @@
-<div>
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- Calendar here!! -->
+<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdn.rawgit.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
+<script src="{% static "pyday_calendar/MonthPicker.min.js" %}"></script>
+<link href="{% static "pyday_calendar/MonthPicker.min.css" %}" rel="stylesheet" type="text/css" />
+<link href="{% static "pyday_calendar/calendar.css" %}" rel="stylesheet" type="text/css" />
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script>
+$(document).ready(function() {
+    $('.Default').MonthPicker();
+});
+</script>
+<!-- Calendar here!! -->
+
+<div id="profile-info">
     <img src="{{ user.picture.url }}" height="360" width="360">
     <div>{{ user.first_name }} {{ user.last_name }} </div>
     <div>email: {{ user.email }}</div>
     <div>Joined on {{ user.date_joined.year }} .{{ user.date_joined.month }}</div>
 </div>
 
-<article>
-    Following
-    {% for user in following %}
-    <div>
-        <a href="/social/profile/{{ user.id }}"><img src="{{ user.picture.url }}" height="100" width="100"></a>
-        <div>{{ user.first_name }} {{ user.last_name }}</div>
-    </div>
-    {% endfor %}
-</article>
+<div id="foll-events">
+    <div id="following-followers">
+    {% if to_follow_button %}
+        {% if is_following %}
+        <a href="/social/unfollow/{{user.id}}">unfollow</a>
+        {% else %}
+        <a href="/social/follow/{{user.id}}">follow</a>
+        {% endif %}
+    {% endif %}
+        <article>
+            Following
+            <p>Total {{following|length}}</p>
+            {% for user in following|slice:"0:3" %}
+            <div>
+                <a href="/social/profile/{{ user.id }}"><img src="{{ user.picture.url }}" height="100" width="100"></a>
+                <div>{{ user.first_name }} {{ user.last_name }}</div>
+            </div>
+            {% endfor %}
+        </article>
 
-<article>
-    Followers
-   {% for user in followers %}
-    <div>
-        <a href="/social/profile/{{ user.id }}"><img src="{{ user.picture.url }}" height="100" width="100"></a>
-        <div>{{ user.first_name }} {{ user.last_name }}</div>
+        <article>
+            Followers
+            <p>Total {{followers|length}}</p>
+           {% for user in followers|slice:"0:3" %}
+            <div>
+                <a href="/social/profile/{{ user.id }}"><img src="{{ user.picture.url }}" height="100" width="100"></a>
+                <div>{{ user.first_name }} {{ user.last_name }}</div>
+            </div>
+            {% endfor %}
+        </article>
     </div>
-    {% endfor %}
-</article>
+    <div id="events">
+        <p><a href="/calendar/daily_events/">Daily events</a></p>
+        <p><a href="/calendar/monthly_events/">Montly events</a></p>
+        <div>
+            <p>Check events for paticular month:</p>
+            <div id="calendar">
+                <form enctype="multipart/form-data" action="/calendar/monthly_events/" method="Post">
+                    {% csrf_token %}
+                    <input id="IconDemo" class='Default' type="text" name="date"/>
+                    <input type="submit" value="Go!" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+{% endblock content %}

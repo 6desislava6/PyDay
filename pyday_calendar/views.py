@@ -10,8 +10,9 @@ from pyday_social_network.models import PyDayUser
 from django.core.exceptions import ValidationError
 from pyday_calendar.models import TimeEventException
 from datetime import datetime
-from pyday_calendar.services import make_hourly_events, find_max_columns,make_calendar
+from pyday_calendar.services import make_hourly_events, find_max_columns, make_calendar
 from pyday.settings import FORMAT_DATE
+from django.template import Context
 
 
 class EventView(View):
@@ -23,8 +24,7 @@ class EventView(View):
             return render(request, 'error.html', {'error': "Not permitted"})
         participants = list(map(lambda x: PyDayUser.objects.get(pk=x.participant_id),
                                 Participant.objects.filter(event_id=event_id)))
-        print(participants)
-        return render(request, 'event.html', {'event': event, 'participants': participants})
+        return render(request, 'event.html', {'event': event, 'participants': participants, 'user': request.user})
 
 
 class MontlyEventView(View):
@@ -47,20 +47,35 @@ class MontlyEventView(View):
             return render(request, 'error.html', {'error': 'Wrong date!'})
         else:
             return render(request, 'monthly_event.html',
-                          {'calendar': calendar, 'month': month, 'year': year})
+                          {'calendar': calendar, 'month': month, 'year': year,
+                           'user': request.user})
 
 
 class DailyEventView(View):
 
+    # Without any parameters in the url it returns the events for the current
+    # day. Otherwise it returns the events for the given date
+
     @method_decorator(login_required)
-    def get(self, request, year, month, day):
-        date_event = datetime(int(year), int(month), int(day))
-        user = request.user
-        events = Event.objects.filter(owner_id=user.id, date=date_event)
-        hourly_events = make_hourly_events(events,
-                                           find_max_columns(events) | 1)
-        return render(request, 'daily_event.html',
-                      {'hourly_events': enumerate(hourly_events)})
+    def get(self, request, year=None, month=None, day=None):
+        try:
+            date_event = self._make_date_event(year, month, day)
+        except ValueError:
+            return render(request, 'error.html', {'error': 'Impossible date'})
+        else:
+            user = request.user
+            events = Event.objects.filter(owner_id=user.id, date=date_event)
+            hourly_events = make_hourly_events(events,
+                                               find_max_columns(events) | 1)
+            return render(request, 'daily_event.html',
+                          {'hourly_events': enumerate(hourly_events),
+                           'user': request.user})
+
+    def _make_date_event(self, year, month, day):
+        if not year:
+            return datetime.now()
+        else:
+            return datetime(int(year), int(month), int(day))
 
 
 class CreateEventView(UploadView):
@@ -73,7 +88,9 @@ class CreateEventView(UploadView):
     def get(self, request):
         form = self.form_class()
         friends = request.user.friends
-        return render(request, self.template_name, {'form': form, 'friends': friends})
+        return render(request, self.template_name, {'form': form,
+                                                    'friends': friends,
+                                                    'user': request.user})
 
     @method_decorator(login_required)
     def post(self, request):
