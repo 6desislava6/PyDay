@@ -163,7 +163,7 @@ FORMAT_DATE = '%m/%Y'
 MONTHS = [None, 'January', 'February', 'March', 'April', 'May', 'June', 'July',
           'August', 'September', 'October', 'November', 'December']
 
-GREETINGS = ((3, 10, "Good morning"),
+GREETINGS = ((1, 10, "Good morning"),
              (10, 13, "Good day"),
              (13, 18, "Good afternoon"),
-             (18, 3, "Good evening"))
+             (18, 24, "Good evening"))

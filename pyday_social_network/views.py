@@ -14,6 +14,7 @@ from pyday.views import UploadView
 from pyday_social_network.models import PyDayUser
 from datetime import datetime
 from pyday_calendar.forms import CreateEventForm
+from random import randrange
 
 
 class RegisterView(FormView):
@@ -82,10 +83,11 @@ def main(request):
     greeting = get_greeting(current_date.hour)
     current_events = get_current_events(current_date.hour, current_date,
                                         request.user)
+    pic = randrange(1, 7)
     return render(request, 'main.html', {'user_request': request.user,
                                          'current_events': current_events,
                                          'greeting': greeting,
-                                         'form': form})
+                                         'form': form, 'pic': pic})
 
 
 @login_required

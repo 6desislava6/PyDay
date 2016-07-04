@@ -2,15 +2,18 @@
 {% load staticfiles %}
 
 {% block content %}
-
-<div id="register">
+<link rel="stylesheet" href="{% static "pyday_social_network/register.css" %}">
+<div id="register" class="form">
+    <h3> Register </h3>
     <form enctype="multipart/form-data" action="/social/register/" method="post">
         {% csrf_token %}
         {{ form_register }}
         <input type="submit" value="Submit" />
     </form>
 </div>
-<div id="login">
+<div id="login" class="form">
+    <h3> Login </h3>
+
     <form enctype="multipart/form-data" action="/social/login/" method="post">
         {% csrf_token %}
         {{ form_login }}

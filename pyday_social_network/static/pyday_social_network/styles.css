@@ -1,0 +1,73 @@
+html body {
+    background: #1D1A21 url('./images/background-PyDay.jpg');
+    background-color: #1D1A21;
+    opacity: .9;
+    color: #FFF;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+
+}
+#logo {
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 90%;
+    text-align: left;
+}
+#content {
+    background-color: white;
+    color: black;
+    margin: auto;
+    margin-top: 10px;
+    width: 90%;
+    border-radius: 25px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+#logout {
+    text-align: right;
+    padding-right: 60px;
+    padding-top: 10px;
+}
+#logout > a {
+    padding: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-top: 30px;
+    color: white;
+    font-size: 16px;
+}
+#logbutton {
+    background-color: #E72C4F;
+    border:0px;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 30px;
+    color: white;
+    font-size: 16px;
+}
+input {
+    background-color: rgba(234, 80, 78, 0.3);
+    border: 0px;
+    padding: 12px;
+    border-radius: 6px;
+    color: black;
+}
+input[type="submit"] {
+    background-color: #EA504E;
+    border:0px;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 30px;
+    color: white;
+    font-size: 18px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+#logo-log {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

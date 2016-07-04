@@ -1,0 +1,45 @@
+#day, #month {
+    margin: 0px;
+    border:0px;
+    padding: 10px;
+    margin-top: 30px;
+    color: white;
+    font-size: 18px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+#day {
+    background-color: #E72C4F;
+    border-radius: 10px 0 0 10px;
+
+}
+#month {
+    background-color: #1D1A21;
+    border-radius: 0 10px 10px 0;
+
+}
+li, a {
+    margin: 0px;
+    padding: 0px;
+}
+.list-inline {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+}
+#current-event{
+    border-top: 10px solid #E72C4F;
+    border-bottom: 10px solid #E72C4F;
+    margin-top: 30px;
+    width: 100%;
+    height: 360px;
+    padding: 30px;
+}
+#current-event h1, h2, h3 {
+    color: white;
+}
+#content{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+}

@@ -1,0 +1,26 @@
+#content {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.form form{
+    display: flex;
+    flex-direction: column;
+}
+input[type="submit"] {
+    background-color: #EA504E;
+    border:0px;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 30px;
+    color: white;
+    font-size: 18px;
+}
+input[type="text"], input[type="password"], input[type="email"]{
+    margin-bottom: 10px;
+}
+#logo{
+    width: 60%;
+
+}
