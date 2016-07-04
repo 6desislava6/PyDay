@@ -81,7 +81,7 @@ class PyDayUser(AbstractBaseUser):
 
     @property
     def friends(self):
-        return self.followers & self.following
+        return list(set(self.followers) & set(self.following))
 
 
 class Song(models.Model):

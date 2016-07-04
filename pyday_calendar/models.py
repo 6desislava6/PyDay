@@ -10,14 +10,25 @@ class TimeEventException(Exception):
 
 
 class EventManager(BaseUserManager):
-    def create_event(self, user, form):
+    def create_event(self, user, form, friends=None):
         form = form.cleaned_data
         if form['to_time'] < form['from_time']:
             raise TimeEventException
 
-        Event(owner=user, from_time=form['from_time'], to_time=form['to_time'],
-              importance=form['importance'], caption=form['caption'],
-              date=form['date'], title=form['title']).save()
+        event = Event(owner=user, from_time=form['from_time'],
+                      to_time=form['to_time'],
+                      importance=form['importance'], caption=form['caption'],
+                      date=form['date'], title=form['title'])
+        event.save()
+        self._add_participants(event, friends)
+
+    def _add_participants(self, event, friends):
+        if friends:
+            for friend in friends:
+                participant = PyDayUser.objects.get(pk=int(friend))
+                print(participant)
+                print(event)
+                Participant(participant=participant, event=event).save()
 
 
 class Event(models.Model):
@@ -45,5 +56,8 @@ class Event(models.Model):
 
 
 class Participant(models.Model):
-    participant = models.OneToOneField(PyDayUser)
-    event = models.OneToOneField(Event, on_delete=models.CASCADE)
+    participant = models.ForeignKey(
+        'pyday_social_network.PyDayUser',
+        on_delete=models.CASCADE,
+    )
+    event = models.ForeignKey('pyday_calendar.Event', on_delete=models.CASCADE)

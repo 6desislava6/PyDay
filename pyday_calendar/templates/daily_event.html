@@ -1,10 +1,16 @@
 {% load mathfilters %}
 {% load staticfiles %}
-<link rel="stylesheet" href="{% static "pyday_calendar/styles.css" %}">
+<script>
+    function overlay() {
+    el = document.getElementById("overlay");
+    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
+</script>
+<link rel="stylesheet" href="{% static "pyday_calendar/daily_event_styles.css" %}">
 <table>
     {% for hour, hour_events in hourly_events %}
     <tr>
-    <td class="hour">{{hour}}ч.</td>
+    <td class="hour">{{hour}}h</td>
         {% for event in hour_events %}
             {% if not event %}
     <td class="notevent"></td>

@@ -29,5 +29,5 @@ def find_max_columns(events):
 def make_calendar(date):
     date_object = datetime.strptime(date, FORMAT_DATE)
     calendar_obj = calendar.Calendar().monthdayscalendar(date_object.year, date_object.month)
-    return [[x if x != 0 else '' for x in week] for week in calendar_obj], date_object.month
+    return [[x if x != 0 else '' for x in week] for week in calendar_obj], date_object.month, date_object.year
 

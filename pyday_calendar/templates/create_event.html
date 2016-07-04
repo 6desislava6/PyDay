@@ -2,17 +2,16 @@
   <head>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script>
     $(document).ready(
 
-      /* This is the function that will get executed after the DOM is fully loaded */
-      function () {
+      /* This is the function that will get executed after the DOM is fuly oaded */
+     function () {
         $( "#datepicker" ).datepicker({
           changeMonth: true,//this option for allowing user to select month
-          changeYear: true //this option for allowing user to select from year range
-        });
+          changeYear: true //this option for allowing user to select from ear range
+       });
       }
 
     );
@@ -22,5 +21,11 @@
 <form enctype="multipart/form-data" action="/calendar/create_event/" method="post">
     {% csrf_token %}
     {{ form }}
+     <select multiple name="friends[]" id="friends">
+    {% for friend in friends %}
+        <option value="{{friend.id}}">{{friend.first_name}} {{friend.last_name}}</option>
+        }
+    {% endfor %}
+    </select>
     <input type="submit" value="Submit" />
 </form>

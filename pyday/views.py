@@ -15,10 +15,10 @@ class UploadView(View):
         return render(request, self.template_name, {'form': form})
 
     @method_decorator(login_required)
-    def post(self, request):
+    def post(self, request, friends=None):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            self.post_function(request.user, form)
+            self.post_function(request.user, form, friends)
             return HttpResponseRedirect(self.success_url)
         else:
             return render(request, 'error.html', {'error': self.error_message})

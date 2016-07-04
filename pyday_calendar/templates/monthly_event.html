@@ -34,14 +34,16 @@ $(document).ready(function() {
         {% for week in calendar %}
         <tr>
             {% for day in week %}
-                <td>
-                {{day}}
+                <td id="{{day|date:'d'}}"><a href="/calendar/daily_events/{{year}}/{{month|stringformat:"02d"}}/{{day|stringformat:"02d"}}">
+                {{day}}</a>
                 </td>
             {% endfor %}
         </tr>
         {% endfor %}
     </table>
-    {{events}}
+
+
+
 </body>
 </html>
 
