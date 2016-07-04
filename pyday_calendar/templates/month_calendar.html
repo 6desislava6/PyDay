@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdn.rawgit.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
+<script src="{% static "pyday_calendar/MonthPicker.min.js" %}"></script>
+<link href="{% static "pyday_calendar/MonthPicker.min.css" %}" rel="stylesheet" type="text/css" />
+<link href="{% static "pyday_calendar/calendar.css" %}" rel="stylesheet" type="text/css" />
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script>
+$(document).ready(function() {
+    $('.Default').MonthPicker();
+});
+</script>
+<form enctype="multipart/form-data" action="/calendar/monthly_events/" method="Post">
+    {% csrf_token %}
+    <input id="IconDemo" class='Default' type="text" name="date"/>
+    <input type="submit" value="Submit" />
+</form>

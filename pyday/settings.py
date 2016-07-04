@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Sofia'
 
 USE_I18N = True
 
@@ -160,3 +160,10 @@ STATICFILES_DIRS = (
 
 DAY = 24
 FORMAT_DATE = '%m/%Y'
+MONTHS = [None, 'January', 'February', 'March', 'April', 'May', 'June', 'July',
+          'August', 'September', 'October', 'November', 'December']
+
+GREETINGS = ((3, 10, "Good morning"),
+             (10, 13, "Good day"),
+             (13, 18, "Good afternoon"),
+             (18, 3, "Good evening"))

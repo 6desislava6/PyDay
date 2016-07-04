@@ -1,4 +1,6 @@
 from pyday_social_network.models import PyDayUser, Song
+from pyday_calendar.models import Event
+from pyday.settings import GREETINGS
 from django.http import HttpResponseRedirect
 
 
@@ -65,3 +67,14 @@ def post_redirect(redirect_to=None):
             return func(request, *args, **kwargs)
         return decorated
     return inner_decorator
+
+
+def get_current_events(current_hour, current_date, user):
+    return list(filter(lambda x: x.from_time <= current_hour and current_hour <= x.to_time, Event.objects.filter(owner_id=user.id, date=current_date)))
+
+
+def get_greeting(current_hour):
+    for greet in GREETINGS:
+        if current_hour >= greet[0] and current_hour <= greet[1]:
+            print(greet[2])
+            return greet[2]

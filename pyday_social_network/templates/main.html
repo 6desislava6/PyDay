@@ -1,2 +1,23 @@
-Hello {{ user.first_name }}! Love ya!
-{% include "profile.html" %}
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<p id="greeting">{{greeting}} {{ user.first_name }}! Ready to do some work?</p>
+<div id="current-event">
+    <p>Current events right now</p>
+    {% for event in current_events %}
+    <p>{{event.title}}</p>
+    {% endfor %}
+</div>
+<ul>
+    <li><a href="/calendar/daily_events">Check events for today</a></li>
+    <li><a href="/calendar/monthly_events">Check events for this month</a></li>
+</ul>
+<div id="daily-calendar" class="ly-calendar">
+    Create an event:
+    {% include "create_event.html" %}
+</div>
+<div id="alarm">
+
+</div>
+{% endblock content %}

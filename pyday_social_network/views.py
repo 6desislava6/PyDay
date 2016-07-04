@@ -7,11 +7,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 # from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, make_picture, give_all_users, map_users_follows, return_user, post_redirect
+from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, make_picture, give_all_users, map_users_follows, return_user, post_redirect, get_current_events, get_greeting
 from django.views.generic import View, FormView
 from django.utils.decorators import method_decorator
 from pyday.views import UploadView
 from pyday_social_network.models import PyDayUser
+from datetime import datetime
+from pyday_calendar.forms import CreateEventForm
 
 
 class RegisterView(FormView):
@@ -75,10 +77,15 @@ def login_user(request):
 
 @login_required
 def main(request):
-    following = request.user.following
-    followers = request.user.followers
+    current_date = datetime.now()
+    form = CreateEventForm(initial={'date': current_date})
+    greeting = get_greeting(current_date.hour)
+    current_events = get_current_events(current_date.hour, current_date,
+                                        request.user)
     return render(request, 'main.html', {'user_request': request.user,
-                                         'followers': followers, 'following': following})
+                                         'current_events': current_events,
+                                         'greeting': greeting,
+                                         'form': form})
 
 
 @login_required
@@ -148,7 +155,7 @@ def display_profile(request, user=None):
         to_follow_button = user != request.user
         is_following = request.user.follows(user)
         return render(request, 'profile.html', {'user': user,
-                                                'user_request':request.user,
+                                                'user_request': request.user,
                                                 'to_follow_button': to_follow_button,
                                                 'is_following': is_following,
                                                 'followers': followers,

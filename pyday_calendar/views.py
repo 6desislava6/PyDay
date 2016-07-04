@@ -11,7 +11,7 @@ from django.core.exceptions import ValidationError
 from pyday_calendar.models import TimeEventException
 from datetime import datetime
 from pyday_calendar.services import make_hourly_events, find_max_columns, make_calendar
-from pyday.settings import FORMAT_DATE
+from pyday.settings import FORMAT_DATE, MONTHS
 from django.template import Context
 
 
@@ -24,11 +24,12 @@ class EventView(View):
             return render(request, 'error.html', {'error': "Not permitted"})
         participants = list(map(lambda x: PyDayUser.objects.get(pk=x.participant_id),
                                 Participant.objects.filter(event_id=event_id)))
-        return render(request, 'event.html', {'event': event, 'participants': participants, 'user': request.user})
+        return render(request, 'event.html', {'event': event, 'participants': participants, 'user_request': request.user})
 
 
 class MontlyEventView(View):
     fail_url = '/social/error'
+    form_class = CreateEventForm
 
     @method_decorator(login_required)
     def get(self, request):
@@ -48,10 +49,12 @@ class MontlyEventView(View):
         else:
             return render(request, 'monthly_event.html',
                           {'calendar': calendar, 'month': month, 'year': year,
-                           'user': request.user})
+                           'user_request': request.user,
+                           'month_readable': MONTHS[month]})
 
 
 class DailyEventView(View):
+    form_class = CreateEventForm
 
     # Without any parameters in the url it returns the events for the current
     # day. Otherwise it returns the events for the given date
@@ -59,6 +62,8 @@ class DailyEventView(View):
     @method_decorator(login_required)
     def get(self, request, year=None, month=None, day=None):
         try:
+            form = self.form_class(initial={'date': datetime.now()})
+            friends = request.user.friends
             date_event = self._make_date_event(year, month, day)
         except ValueError:
             return render(request, 'error.html', {'error': 'Impossible date'})
@@ -69,7 +74,8 @@ class DailyEventView(View):
                                                find_max_columns(events) | 1)
             return render(request, 'daily_event.html',
                           {'hourly_events': enumerate(hourly_events),
-                           'user': request.user})
+                           'user_request': request.user, 'form': form,
+                           'friends': friends, 'month': month, 'year': year})
 
     def _make_date_event(self, year, month, day):
         if not year:
@@ -90,7 +96,7 @@ class CreateEventView(UploadView):
         friends = request.user.friends
         return render(request, self.template_name, {'form': form,
                                                     'friends': friends,
-                                                    'user': request.user})
+                                                    'user_request': request.user})
 
     @method_decorator(login_required)
     def post(self, request):

@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
 {% load mathfilters %}
 {% load staticfiles %}
 <script>
@@ -23,3 +28,10 @@
     </tr>
     {% endfor %}
 </table>
+
+<div id="daily-calendar" class="ly-calendar">
+    Create an event for today:
+    {% include "create_event.html" %}
+</div>
+
+{% endblock content %}

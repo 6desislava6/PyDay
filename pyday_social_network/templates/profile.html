@@ -2,24 +2,9 @@
 {% load staticfiles %}
 
 {% block content %}
-<!-- Calendar here!! -->
-<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="https://cdn.rawgit.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
-<script src="{% static "pyday_calendar/MonthPicker.min.js" %}"></script>
-<link href="{% static "pyday_calendar/MonthPicker.min.css" %}" rel="stylesheet" type="text/css" />
-<link href="{% static "pyday_calendar/calendar.css" %}" rel="stylesheet" type="text/css" />
-<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
-
-<script>
-$(document).ready(function() {
-    $('.Default').MonthPicker();
-});
-</script>
-<!-- Calendar here!! -->
 
 <div id="profile-info">
-    <img src="{{ user.picture.url }}" height="360" width="360">
+    <img src="{{ user.picture.url }}" height="200" width="200">
     <div>{{ user.first_name }} {{ user.last_name }} </div>
     <div>email: {{ user.email }}</div>
     <div>Joined on {{ user.date_joined.year }} .{{ user.date_joined.month }}</div>
@@ -62,11 +47,7 @@ $(document).ready(function() {
         <div>
             <p>Check events for paticular month:</p>
             <div id="calendar">
-                <form enctype="multipart/form-data" action="/calendar/monthly_events/" method="Post">
-                    {% csrf_token %}
-                    <input id="IconDemo" class='Default' type="text" name="date"/>
-                    <input type="submit" value="Go!" />
-                </form>
+            {% include "month_calendar.html" %}
             </div>
         </div>
     </div>

@@ -1,11 +1,21 @@
-<form enctype="multipart/form-data" action="/social/register/" method="post">
-    {% csrf_token %}
-    {{ form_register }}
-    <input type="submit" value="Submit" />
-</form>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<form enctype="multipart/form-data" action="/social/login/" method="post">
-    {% csrf_token %}
-    {{ form_login }}
-    <input type="submit" value="Submit" />
-</form>
+{% block content %}
+
+<div id="register">
+    <form enctype="multipart/form-data" action="/social/register/" method="post">
+        {% csrf_token %}
+        {{ form_register }}
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+<div id="login">
+    <form enctype="multipart/form-data" action="/social/login/" method="post">
+        {% csrf_token %}
+        {{ form_login }}
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+{% endblock content %}
