@@ -12,25 +12,28 @@
 }
 </script>
 <link rel="stylesheet" href="{% static "pyday_calendar/daily_event_styles.css" %}">
-<table>
-    {% for hour, hour_events in hourly_events %}
-    <tr>
-    <td class="hour">{{hour}}h</td>
-        {% for event in hour_events %}
-            {% if not event %}
-    <td class="notevent"></td>
-            {% elif hour != event.from_time|sub:1 %}
+<table class="table .table-striped .table-hover">
+    <thead><h3 style="text-align:center">Events for {{day}} {{month}} {{year}} </h3></thead>
+    <tbody>
+        {% for hour, hour_events in hourly_events %}
+        <tr>
+        <td class="hour">{{hour|add:"1"}}h</td>
+            {% for event in hour_events %}
+                {% if not event %}
+        <td class="notevent"></td>
+                {% elif hour != event.from_time|sub:1 %}
 
-            {% else %}
-    <td class="event" rowspan="{{event.to_time|sub:event.from_time}}">{{event.title}}</td>
-            {% endif %}
+                {% else %}
+        <td class="event {{event.importance}}" rowspan="{{event.to_time|sub:event.from_time}}">{{event.title}}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
+    </tbody>
 </table>
 
 <div id="daily-calendar" class="ly-calendar">
-    Create an event for today:
+    <h3 style="text-align:center">Create an event for today:</h3>
     {% include "create_event.html" %}
 </div>
 

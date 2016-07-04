@@ -31,12 +31,16 @@ html body {
     padding-right: 60px;
     padding-top: 10px;
 }
+#logbutton:hover {
+    background-color: black;
+}
 #logout > a {
     padding: 10px;
     padding-right: 30px;
     padding-left: 30px;
     margin-top: 30px;
-    color: white;
+    margin-bottom: 30px;
+    color: black;
     font-size: 16px;
 }
 #logbutton {
@@ -55,6 +59,9 @@ input {
     border-radius: 6px;
     color: black;
 }
+input:hover, a:hover{
+    opacity: 0.8;
+}
 input[type="submit"] {
     background-color: #EA504E;
     border:0px;
@@ -70,4 +77,23 @@ input[type="submit"] {
     display: flex;
     flex-direction: row;
     width: 100%;
+}
+
+#daily-calendar form {
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+#daily_calendar form input {
+    width: 40%;
+    margin: 0 auto;
+}
+#MonthPicker_Button_IconDemo {
+    padding-top: 10px;
+}
+#user-name {
+    padding-top: 20px;
+    color: black;
 }

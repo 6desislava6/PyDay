@@ -51,6 +51,7 @@ docs/_build/*.sqlite3
 *.pyc
 
 md\~
+pyday_social_network/static/pyday_social_network/images/
 pyday_calendar/static/pyday_calendar/winner.jpg
-pyday_social_network/static/images
-pyday_social_network/static/cropped
+
+

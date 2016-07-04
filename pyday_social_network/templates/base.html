@@ -14,11 +14,9 @@
     <div id="content">
         <div id="logo-log">
             <div id="logo">
-                <img  src="{% static "pyday_social_network/images/logo.png" %}" width="400" height="150">
+                <a href="/social/main"><img  src="{% static "pyday_social_network/images/logo.png" %}" width="400" height="150"></a>
             </div>
-            <div id="logout">
-            {% if user_request %}
-            <a href="/social/profile/{{user.id}}">{{user_request.first_name}} {{user_request.last_name}}</a>
+            <div id="logout">{% if user_request %}<a id="user-name" href="/social/profile/{{user.id}}">{{user_request.first_name}} {{user_request.last_name}}</a>
             <a id="logbutton" href="/social/logout">logout</a>
             {% endif %}
             </div>

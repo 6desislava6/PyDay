@@ -43,3 +43,10 @@ li, a {
     padding-left: 0px;
     padding-right: 0px;
 }
+#create{
+    color: black;
+    text-align: center;
+}
+#menus {
+    padding: 30px;
+}

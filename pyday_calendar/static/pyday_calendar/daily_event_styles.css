@@ -21,3 +21,24 @@ table {
     border-bottom: 1px solid;
     border-color:  #A9A9A9;
 }
+.NO {
+    background-color: rgba(194, 255, 96, 0.9);
+}
+.SH {
+    background-color: rgba(8, 246, 20, 0.9);
+}
+.MI {
+    background-color: rgba(246, 178, 8, 0.9);
+}
+.I {
+    background-color: rgba(246, 91, 8, 0.9);
+}
+.VI {
+    background-color: rgba(246, 36, 8, 0.9);
+}
+.EI {
+    background-color: rgba(234, 0, 62, 1)
+}
+.event {
+    font-size: 20px;
+}

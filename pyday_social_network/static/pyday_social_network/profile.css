@@ -1,0 +1,72 @@
+#profile{
+    display: flex;
+    flex-direction: row;
+}
+#profile>div {
+    width: 50%;
+}
+#profile-info img {
+    margin: 0 auto;
+    border: 10px solid #E72C4F;
+
+}
+#profile-info {
+    padding: 60px;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+img {
+    align-self: flex-start;
+}
+h4 {
+    text-align: center;
+}
+.p {
+    background-color: #E72C4F;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+}
+#day, #month {
+    border:0px;
+    padding: 10px;
+    margin-top: 30px;
+    color: white;
+    font-size: 18px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+#day {
+    background-color: #E72C4F;
+    border-radius: 10px 0 0 10px;
+
+}
+#month {
+    background-color: #1D1A21;
+    border-radius: 0 10px 10px 0;
+
+}
+#events>p {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.f{
+    background-color: #E72C4F;
+    border:0px;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 30px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+a {
+    color: white;
+}
+a:hover{
+    color: white;
+}

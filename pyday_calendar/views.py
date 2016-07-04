@@ -75,7 +75,9 @@ class DailyEventView(View):
             return render(request, 'daily_event.html',
                           {'hourly_events': enumerate(hourly_events),
                            'user_request': request.user, 'form': form,
-                           'friends': friends, 'month': month, 'year': year})
+                           'friends': friends, 'day': date_event.day,
+                           'month': MONTHS[date_event.month],
+                           'year': date_event.year})
 
     def _make_date_event(self, year, month, day):
         if not year:
@@ -88,7 +90,7 @@ class CreateEventView(UploadView):
     form_class = CreateEventForm
     template_name = 'create_event.html'
     post_function = staticmethod(Event.objects.create_event)
-    success_url = '/social/main'
+    success_url = '/calendar/daily_events'
 
     @method_decorator(login_required)
     def get(self, request):

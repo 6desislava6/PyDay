@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
 {% for user in users %}
 <div>
     <a href="/social/profile/{{ user.0.id }}"><img src="{{ user.0.picture.url }}" height="100" width="100"></a>
@@ -9,3 +13,4 @@
     {% endif %}
 </div>
 {% endfor %}
+{% endblock content %}

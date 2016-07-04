@@ -22,3 +22,7 @@ class UploadView(View):
             return HttpResponseRedirect(self.success_url)
         else:
             return render(request, 'error.html', {'error': self.error_message})
+
+
+def error404(request):
+    return render(request, 'error.html', {'error': "Error 404 - Page not found!"})

@@ -93,7 +93,7 @@ def main(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return HttpResponse('Youve logged out')
+    return render(request, 'error.html', {'error': 'Youve logged out'})
 
 
 @login_required
@@ -131,8 +131,7 @@ def follow(request, user):
     if not success:
         return render(request, 'error.html',
                       {'error': 'Youve already followed this user {}'.format(user.email)})
-    return render(request, 'error.html',
-                  {'error': 'Youve followed {}'.format(user.email)})
+    return HttpResponseRedirect('/social/profile')
 
 
 @login_required
@@ -141,8 +140,7 @@ def unfollow(request, user):
     if not success:
         return render(request, 'error.html',
                       {'error': 'You dont follow this user {}'.format(user.email)})
-    return render(request, 'error.html',
-                  {'error': 'Youve unfollowed {}'.format(user.email)})
+    return HttpResponseRedirect('/social/profile')
 
 
 @login_required
