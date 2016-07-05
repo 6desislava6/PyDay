@@ -170,3 +170,4 @@ GREETINGS = ((1, 10, "Good morning"),
              (18, 24, "Good evening"))
 
 ALARMS_FILE_NAME = "alarms.pickle"
+ALARMS_FILE_NAME_REMOTE = "alarms.pickle"

@@ -5,12 +5,7 @@
 
 {% load mathfilters %}
 {% load staticfiles %}
-<script>
-    function overlay() {
-    el = document.getElementById("overlay");
-    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-}
-</script>
+
 <link rel="stylesheet" href="{% static "pyday_calendar/daily_event_styles.css" %}">
 <table class="table .table-striped .table-hover">
     <thead><h3 style="text-align:center">Events for {{day}} {{month}} {{year}} </h3></thead>

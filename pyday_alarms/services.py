@@ -1,7 +1,11 @@
 import paramiko
 import pickle
-from pyday.settings import ALARMS_FILE_NAME
-from pass_info import password, username
+from pyday.settings import ALARMS_FILE_NAME, ALARMS_FILE_NAME_REMOTE
+from pyday_alarms.pass_info import password, username
+from pyday_alarms.models import Alarm
+COMMANDS = ['killall python',
+            'python ~/multilineMAX7219/main_script.py ~/alarms.pickle']
+
 
 # It connects to the raspberry
 # copies the new alarms (updated)
@@ -15,18 +19,21 @@ class RaspberryConnector:
         self.ssh = paramiko.SSHClient()
         self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-    def connect(self, file):
+    def run_alarms(self):
         self.ssh.connect('10.42.0.136', username=self.username,
                          password=self.password)
+        self._update_alarms()
+        stdin, stdout, stderr = self.ssh.exec_command(COMMANDS[1])
+        print(stdout)
 
+    def _update_alarms(self):
         sftp = self.ssh.open_sftp()
-        sftp.put('/home/me/file.ext', '/remote/home/file.ext')
-        stdin, stdout, stderr = self.ssh.exec_command(self.COMMAND.format(message))
+        sftp.put(ALARMS_FILE_NAME, ALARMS_FILE_NAME_REMOTE)
 
 
-def dump_alarms(file_name, alarms):
-    with open(file_name, 'wb') as handle:
-        pickle.dump(alarms, handle)
+def dump_alarms(alarms):
+    with open(ALARMS_FILE_NAME, 'wb') as handle:
+        pickle.dump(alarms, handle, 2)
 
 
 def _prepare_alarms(alarms):
@@ -34,8 +41,8 @@ def _prepare_alarms(alarms):
 
 
 def update_alarms(user):
-    alarms = _prepare_alarms(Alarms.objects.filter(pk=user.id))
-    dump_alarms(ALARMS_FILE_NAME)
-    # raspberry-то на съответния user
-    connector = RaspberryConnector(username, password)
-
+    alarms = _prepare_alarms(Alarm.objects.filter(user_id=user.id))
+    print(alarms)
+    dump_alarms(alarms)
+    # raspberry-то на съответния user - IP адрес,
+    RaspberryConnector(username, password).run_alarms()

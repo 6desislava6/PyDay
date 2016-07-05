@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+    $(document).ready(
+
+      /* This is the function that will get executed after the DOM is fuly oaded */
+     function () {
+        $( "#datepicker" ).datepicker({
+          changeMonth: true,//this option for allowing user to select month
+          changeYear: true //this option for allowing user to select from ear range
+       });
+      }
+
+    );
+    </script>
+    <link rel="stylesheet" href="runnable.css" />
+</head>
+<form enctype="multipart/form-data" action="/alarms/alarms/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="number" name="hour" min="1" max="24" step="1">
+    <input type="number" name="mins" min="0" max="59" step="1">
+    <input type="submit" value="Create Alarm" />
+</form>
+

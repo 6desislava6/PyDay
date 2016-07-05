@@ -1,4 +1,4 @@
-import pickle
+import cPickle
 from apscheduler.schedulers.blocking import BlockingScheduler
 import sys
 from message_display import display_messages
@@ -8,7 +8,7 @@ from message_display import display_messages
 # It loads all alarms from a pickle file
 def load_alarms(file):
     with open(file, 'rb') as handle:
-        return pickle.load(handle)
+        return cPickle.loads(handle)
 
 
 # It adds all alarms from the pickle file as jobs
