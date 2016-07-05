@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^calendar/', include('pyday_calendar.urls')),
-    url(r'^social/', include('pyday_social_network.urls'))
+    url(r'^social/', include('pyday_social_network.urls')),
+    url(r'^alarms/', include('pyday_alarms.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = "pyday.views.error404"

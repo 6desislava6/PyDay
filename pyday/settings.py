@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'pyday_calendar',
     'pyday_social_network',
     'mathfilters',
+    'pyday_alarms',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -167,3 +168,5 @@ GREETINGS = ((1, 10, "Good morning"),
              (10, 13, "Good day"),
              (13, 18, "Good afternoon"),
              (18, 24, "Good evening"))
+
+ALARMS_FILE_NAME = "alarms.pickle"
