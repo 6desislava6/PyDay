@@ -48,8 +48,7 @@ class MontlyEventView(View):
             return render(request, 'error.html', {'error': 'Wrong date!'})
         else:
             return render(request, 'monthly_event.html',
-                          {'calendar': calendar, 'month': month, 'year': year,
-                           'user_request': request.user,
+                          {**locals(), 'user_request': request.user,
                            'month_readable': MONTHS[month]})
 
 

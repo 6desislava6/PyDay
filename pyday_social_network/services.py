@@ -23,7 +23,7 @@ def make_song(user, form):
     Song(owner=user, song=form.cleaned_data['song']).save()
 
 
-def make_picture(user, form):
+def make_picture(user, form, *args):
     user.picture = form.cleaned_data['picture']
     user.save()
 

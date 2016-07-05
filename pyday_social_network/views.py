@@ -85,9 +85,7 @@ def main(request):
                                         request.user)
     pic = randrange(1, 7)
     return render(request, 'main.html', {'user_request': request.user,
-                                         'current_events': current_events,
-                                         'greeting': greeting,
-                                         'form': form, 'pic': pic})
+                                         **locals()})
 
 
 @login_required
@@ -154,9 +152,6 @@ def display_profile(request, user=None):
         followers = request.user.followers
         to_follow_button = user != request.user
         is_following = request.user.follows(user)
-        return render(request, 'profile.html', {'user': user,
-                                                'user_request': request.user,
-                                                'to_follow_button': to_follow_button,
-                                                'is_following': is_following,
-                                                'followers': followers,
-                                                'following': following})
+        form = UploadPictureForm()
+        return render(request, 'profile.html', {'user_request': request.user,
+                                                **locals()})
