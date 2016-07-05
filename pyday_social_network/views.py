@@ -14,6 +14,7 @@ from pyday.views import UploadView
 from pyday_social_network.models import PyDayUser
 from datetime import datetime
 from pyday_calendar.forms import CreateEventForm
+from pyday_alarms.forms import CreateAlarmForm
 from random import randrange
 
 
@@ -84,6 +85,8 @@ def main(request):
     current_events = get_current_events(current_date.hour, current_date,
                                         request.user)
     pic = randrange(1, 7)
+    form_alarm = CreateAlarmForm()
+
     return render(request, 'main.html', {'user_request': request.user,
                                          **locals()})
 

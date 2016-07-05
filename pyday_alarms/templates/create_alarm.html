@@ -8,7 +8,7 @@
 
       /* This is the function that will get executed after the DOM is fuly oaded */
      function () {
-        $( "#datepicker" ).datepicker({
+        $( "#datepicker2" ).datepicker({
           changeMonth: true,//this option for allowing user to select month
           changeYear: true //this option for allowing user to select from ear range
        });
@@ -20,8 +20,10 @@
 </head>
 <form enctype="multipart/form-data" action="/alarms/alarms/" method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ form_alarm }}
+    Hour:
     <input type="number" name="hour" min="1" max="24" step="1">
+    Minutes:
     <input type="number" name="mins" min="0" max="59" step="1">
     <input type="submit" value="Create Alarm" />
 </form>

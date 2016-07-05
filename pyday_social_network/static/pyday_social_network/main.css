@@ -34,6 +34,13 @@ li, a {
     width: 100%;
     height: 360px;
     padding: 30px;
+    display: flex;
+    flex-orientation:row;
+    justify-content: space-between;
+}
+#current-event div{
+    display: block;
+    width: 100%
 }
 #current-event h1, h2, h3 {
     color: white;
@@ -49,4 +56,33 @@ li, a {
 }
 #menus {
     padding: 30px;
+}
+#alarm {
+    text-align: right;
+    box-sizing: border-box;
+    padding-right: 60px;
+    box-sizing: border-box;
+}
+
+#overlay {
+    visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 200px;
+     width:100%;
+     height:100%;
+     z-index: 10;
+}
+
+#overlay div {
+     width:400px;
+     margin: 100px auto;
+     background-color: white;
+     border:3px solid #E72C4F;
+     padding:15px;
+     border-radius: 10px;
+}
+#overlay form input {
+    margin-top: 10px;
+    display: block;
 }

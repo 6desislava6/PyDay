@@ -5,7 +5,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from pyday_alarms.services import update_alarms
-from pyday_alarms.forms import CreateEventForm
+from pyday_alarms.forms import CreateAlarmForm
+from pyday_calendar.forms import CreateEventForm
 from pyday_alarms.models import Alarm
 from datetime import datetime, timedelta
 
@@ -15,7 +16,7 @@ class AlarmView(View):
     @method_decorator(login_required)
     def get(self, request):
         # да излизат всички аларми?
-        form = CreateEventForm()
+        form_alarm = CreateAlarmForm()
         return render(request, 'create_alarm.html', locals())
 
     # It creates a new alarm and updates all on the raspberry
