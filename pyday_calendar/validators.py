@@ -1,10 +1,9 @@
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 
+
 # As long as all of the arguments to your class’ constructor are themselves
 # serializable, you can use the @deconstructible class decorator
-
-
 @deconstructible
 class validate_range(object):
     compare = lambda self, a, b, c: a > c or a < b

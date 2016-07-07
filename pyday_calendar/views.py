@@ -22,9 +22,10 @@ class EventView(View):
         event = Event.objects.get(pk=event_id)
         if event.owner_id != request.user.id:
             return render(request, 'error.html', {'error': "Not permitted"})
-        participants = list(map(lambda x: PyDayUser.objects.get(pk=x.participant_id),
-                                Participant.objects.filter(event_id=event_id)))
-        return render(request, 'event.html', {'event': event, 'participants': participants, 'user_request': request.user})
+        participants = event.participants
+        return render(request, 'event.html',
+                      {'event': event, 'participants': participants,
+                       'user_request': request.user})
 
 
 class MontlyEventView(View):

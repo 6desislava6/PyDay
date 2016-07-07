@@ -26,8 +26,6 @@ class EventManager(BaseUserManager):
         if friends:
             for friend in friends:
                 participant = PyDayUser.objects.get(pk=int(friend))
-                print(participant)
-                print(event)
                 Participant(participant=participant, event=event).save()
 
 
@@ -48,8 +46,8 @@ class Event(models.Model):
 
     @property
     def participants(self):
-        event = Participant.object.all().filter(event=self)
-        return [participant_event.event for participant_event in event]
+        event = Participant.objects.all().filter(event=self)
+        return [participant_event.participant for participant_event in event]
 
     def __str__(self):
         return "{} from {} to {} on {}".format(self.title, self.from_time, self.to_time, self.date)

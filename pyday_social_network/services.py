@@ -10,7 +10,6 @@ def register_user_post(request, form_register_class):
         PyDayUser.objects.create_user_request(request)
         return True
     return False
-    # да хващам exception-ите и да ги записвам в лог
 
 
 def register_user_get(request, form_register_class, form_login_class):
@@ -50,15 +49,6 @@ def anonymous_required(redirect_to=None):
     return inner_decorator
 
 
-# I don't remember this one :D
-def mapped_user(attribute):
-    def mapper_users(func):
-        def decorated(request, *args):
-            user = request.user
-            users = getattr(user, attribute)
-            func
-
-
 def post_redirect(redirect_to=None):
     def inner_decorator(func):
         def decorated(request, *args, **kwargs):
@@ -76,5 +66,12 @@ def get_current_events(current_hour, current_date, user):
 def get_greeting(current_hour):
     for greet in GREETINGS:
         if current_hour >= greet[0] and current_hour <= greet[1]:
-            print(greet[2])
             return greet[2]
+
+'''
+def mapped_user(attribute):
+    def mapper_users(func):
+        def decorated(request, *args):
+            user = request.user
+            users = getattr(user, attribute)
+            func'''

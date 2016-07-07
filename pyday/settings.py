@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pyday_social_network',
     'mathfilters',
     'pyday_alarms',
+    'coverage'
 ]
 
 MIDDLEWARE_CLASSES = [

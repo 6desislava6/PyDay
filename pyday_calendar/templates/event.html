@@ -1,15 +1,23 @@
-<div>
-    <p>Event: {{event.title}}</p>
-    <p>Date: {{event.date}}</p>
-    <p>Description: {{event.caption}}</p>
-    <p>NB: {{event.importance}}</p>
-    <p>Beginning hour: {{event.from_time}}h</p>
-    <p>Ending hour: {{event.to_time}}h</p>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<link rel="stylesheet" href="{% static "pyday_calendar/event_styles.css" %}">
+<div id="event">
+    <p><div class="tag">Event:</div>  {{event.title}}</p>
+    <p><div class="tag">Date:</div>  {{event.date}}</p>
+    <p><div class="tag">Description:</div>  {{event.caption}}</p>
+    <p><div class="tag">NB:</div>  {{event.importance}}</p>
+    <p><div class="tag">Beginning hour:</div>  {{event.from_time}}h</p>
+    <p><div class="tag">Ending hour:</div>  {{event.to_time}}h</p>
 </div>
 
-{% for user in participants %}
-<div>
-    <a href="/social/profile/{{user.id}}"><img src="{{ user.picture.url }}" height="100" width="100"></a>
-    <div>{{ user.first_name }} {{ user.last_name }}</div>
-</div>
+<div id="participants">
+    <p class="p">Participants</p>
+    {% for user in participants %}
+    <div>
+        <a href="/social/profile/{{user.id}}"><img src="{{ user.picture.url }}" height="100" width="100"></a>
+        <div>{{ user.first_name }} {{ user.last_name }}</div>
+    </div>
 {% endfor %}
+</div>
+{% endblock content %}

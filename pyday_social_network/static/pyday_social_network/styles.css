@@ -45,6 +45,7 @@ html body {
     color: black;
     font-size: 16px;
     margin: 3px;
+    text-align: right;
 }
 #logbutton {
     background-color: #E72C4F;

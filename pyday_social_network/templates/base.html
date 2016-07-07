@@ -16,7 +16,7 @@
             <div id="logo">
                 <a href="/social/main"><img  src="{% static "pyday_social_network/images/logo.png" %}" width="400" height="150"></a>
             </div>
-            <div id="logout">{% if user_request %}<a id="user-name" href="/social/profile/{{user_request.id}}"><img src="{{user_request.picture.url}}" height="30px" width="30px"></a>Name: {{user_request.first_name}} {{user_request.last_name}}
+            <div id="logout">{% if user_request %}<a id="user-name" href="/social/profile/{{user_request.id}}"><img src="{{user_request.picture.url}}" height="30px" width="30px"></a>
             <a id="logbutton" href="/social/logout">logout</a>
             {% endif %}
             </div>

@@ -8,7 +8,6 @@ class PyDayUserAuth:
             user = PyDayUser.objects.get(email=email)
             if user.check_password(password):
                 return user
-            #return PyDayUser.objects.get(pk=1)
         except PyDayUser.DoesNotExist:
             return None
 

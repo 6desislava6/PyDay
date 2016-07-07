@@ -42,3 +42,16 @@ table {
 .event {
     font-size: 20px;
 }
+.event:hover {
+    opacity: 0.7;
+}
+.caption {
+    display: block;
+    font-size: 14px;
+}
+.event a {
+    color: black;
+}
+.event a:hover{
+    text-decoration: none;
+}

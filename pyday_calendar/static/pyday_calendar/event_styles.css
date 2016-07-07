@@ -1,0 +1,24 @@
+#event {
+    padding-left: 36px;
+    display: inline-block;
+    width: 50%;
+    font-size: 20px;
+}
+.tag {
+    font-weight: 700;
+}
+.p {
+    background-color: #E72C4F;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+}
+#participants{
+    width: 50%;
+    display: inline-block;
+}
+#content{
+    display: flex;
+    flex-direction: row;
+}

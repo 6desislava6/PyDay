@@ -19,7 +19,7 @@
                 {% elif hour != event.from_time|sub:1 %}
 
                 {% else %}
-        <td class="event {{event.importance}}" rowspan="{{event.to_time|sub:event.from_time}}">{{event.title}}</td>
+    <td class="event {{event.importance}}" rowspan="{{event.to_time|sub:event.from_time}}"><a href="/calendar/event/{{event.id}}">{{event.title}}</a> <div class="caption">{{event.caption}}</div><div class="caption"></div></td>
                 {% endif %}
             {% endfor %}
         </tr>

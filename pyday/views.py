@@ -9,10 +9,10 @@ class UploadView(View):
     # препраща към fail_url, когато формата е невалидна
     error_message = 'Invalid form!'
 
-    @method_decorator(login_required)
-    def get(self, request):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+    # @method_decorator(login_required)
+    # def get(self, request):
+        # form = self.form_class()
+        # return render(request, self.template_name, {'form': form})
 
     @method_decorator(login_required)
     def post(self, request, friends=None):

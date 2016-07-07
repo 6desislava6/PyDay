@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^alarms/$', views.AlarmView.as_view(), name='create-event'),
 ]
 
-urlpatterns += patterns('pyday_social_network.views',
+'''urlpatterns += patterns('pyday_social_network.views',
                         url(r'^list/$', 'list', name='list'))
+'''

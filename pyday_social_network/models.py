@@ -46,6 +46,9 @@ class PyDayUser(AbstractBaseUser):
     REQUIRED_FIELDS = []
     objects = PyDayManager()
 
+    def delete(self):
+        self.picture.delete()
+
     def _follow_unfollow_inner(self, other, follow=True):
         other = PyDayUser.objects.get(pk=other)
         condition = self.follows(other.id) if follow else not self.follows(other)

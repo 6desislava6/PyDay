@@ -34,47 +34,44 @@ class RegisterView(FormView):
 
     @method_decorator(anonymous_required(redirect_to='/social/main'))
     def post(self, request):
-        try:
-            if register_user_post(request, self.form_register_class):
-                return HttpResponse('стаа!')
-            return HttpResponse('невалидна форма')
-        except ValidationError:
-            return HttpResponse('невалиден мейл, бре')
+        if register_user_post(request, self.form_register_class):
+            return render(request, 'error.html',
+                          {'error': 'You have registered'})
+        return render(request, 'error.html', {'error': 'Invalid form'})
 
 
 class UploadPictureView(UploadView):
-    template_name = 'upload_picture.html'
+    # template_name = 'upload_picture.html'
     form_class = UploadPictureForm
     post_function = staticmethod(make_picture)
     success_url = '/social/main'
 
 
 class UploadSongView(UploadView):
-    template_name = 'upload_song.html'
+    # template_name = 'upload_song.html'
     form_class = UploadSongForm
     post_function = staticmethod(make_song)
     success_url = '/social/main'
 
 
 @post_redirect(redirect_to='/social/main')
+@anonymous_required(redirect_to='/social/main')
 @require_POST
 def login_user(request):
     form = LoginUserForm(data=request.POST)
 
     if not form.is_valid():
-        return HttpResponse('невалидна форма')
+        return render(request, 'error.html', {'error': 'Invalid form'})
 
     form = form.cleaned_data
     user = authenticate(email=form['email'], password=form['password'])
 
     if user is None:
-        return HttpResponse("Невалидни email и/или парола")
+        return render(request, 'error.html',
+                      {'error': 'Invalid email/password'})
 
-    if user.is_active:
-        login(request, user)
-        return HttpResponseRedirect('/social/main')
-    else:
-        return HttpResponse('активирайте акаунта си')
+    login(request, user)
+    return HttpResponseRedirect('/social/main')
 
 
 @login_required
@@ -94,7 +91,7 @@ def main(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return render(request, 'error.html', {'error': 'Youve logged out'})
+    return render(request, 'error.html', {'error': "You have logged out"})
 
 
 @login_required
@@ -131,7 +128,7 @@ def follow(request, user):
     success, user = request.user.follow(user)
     if not success:
         return render(request, 'error.html',
-                      {'error': 'Youve already followed this user {}'.format(user.email)})
+                      {'error': "You have already followed this user {}".format(user.email)})
     return HttpResponseRedirect('/social/profile')
 
 
@@ -140,7 +137,7 @@ def unfollow(request, user):
     success, user = request.user.unfollow(user)
     if not success:
         return render(request, 'error.html',
-                      {'error': 'You dont follow this user {}'.format(user.email)})
+                      {'error': "You do not follow this user {}".format(user.email)})
     return HttpResponseRedirect('/social/profile')
 
 

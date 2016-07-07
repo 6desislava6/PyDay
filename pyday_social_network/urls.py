@@ -7,7 +7,7 @@ app_name = 'pyday_social_network'
 urlpatterns = [
     url(r'^upload_picture/$', views.UploadPictureView.as_view(), name='upload_picture'),
     url(r'^upload_song/$', views.UploadSongView.as_view(), name='upload_song'),
-    url(r'^register/$', views.RegisterView.as_view(), name='register-login'),
+    url(r'^register/$', views.RegisterView.as_view(), name='register_login'),
     url(r'^login/$', views.login_user, name='login'),
     url(r'^main/$', views.main, name='main'),
     url(r'^logout/$', views.logout_user, name='logout'),
@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^profile/(?P<user>\d*)$', views.display_profile, name='profile'),
 ]
 
-urlpatterns += patterns('pyday_social_network.views',
+'''urlpatterns += patterns('pyday_social_network.views',
                         url(r'^list/$', 'list', name='list'))
-
+'''
 # handler404 = 'pyday.views.404'
