@@ -1,7 +1,6 @@
 from pyday.settings import DAY, FORMAT_DATE
 import calendar
 from datetime import datetime
-from pyday_calendar.models import Event
 
 
 def make_hourly_events(events, max_columns):

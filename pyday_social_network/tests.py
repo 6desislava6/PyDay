@@ -25,10 +25,6 @@ class PyDayUserTest(TestCase):
         self.assertEqual(self.user.email, "bla@bla.bla")
         self.assertNotEqual(self.user.password, "secret")
 
-    # TODO
-    def test_user_creation_post(self):
-        pass
-
     def test_user_creation_save(self):
         PyDayUser.objects._create_user("bla@bla2.bla", "secret",
                                        "MynameisWhat",
@@ -167,6 +163,14 @@ class ViewsTestNotLogged(TestCase):
                                         follow=True)
             self.assertEqual(response.redirect_chain, [('/social/main', 302),
                                                        ('/social/main/', 301)])
+
+    def test_login_fail(self):
+        with self.assertTemplateUsed('error.html'):
+            response = self.client.post(reverse('pyday_social_network:login'),
+                                        {'email': "bla@bla.bla",
+                                         'password': 'secretaaa'},
+                                        follow=True)
+            self.assertContains(response, "Invalid email/password")
 
     def test_login_invalid_form(self):
         with self.assertTemplateUsed('error.html'):

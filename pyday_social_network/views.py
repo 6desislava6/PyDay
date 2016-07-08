@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 # from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from pyday_social_network.services import register_user_post, register_user_get, anonymous_required, make_song, make_picture, give_all_users, map_users_follows, return_user, post_redirect, get_current_events, get_greeting
+from pyday_social_network.services import *
 from django.views.generic import View, FormView
 from django.utils.decorators import method_decorator
 from pyday.views import UploadView
@@ -155,3 +155,12 @@ def display_profile(request, user=None):
         form = UploadPictureForm()
         return render(request, 'profile.html', {'user_request': request.user,
                                                 **locals()})
+
+
+@login_required
+@require_POST
+def search_user(request):
+    users_mapped = map_users_follows(request.user,
+                                     search_users(request.POST["searched"]))
+    return render(request, 'all_users.html',
+                  {'users': users_mapped, 'user_request': request.user})

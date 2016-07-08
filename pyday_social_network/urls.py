@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^follow/(?P<user>\d+)$', views.follow, name='follow'),
     url(r'^unfollow/(?P<user>\d+)$', views.unfollow, name='unfollow'),
     url(r'^profile/(?P<user>\d*)$', views.display_profile, name='profile'),
+    url(r'^search/$', views.search_user, name='search'),
 ]
 
 '''urlpatterns += patterns('pyday_social_network.views',

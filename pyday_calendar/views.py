@@ -111,7 +111,4 @@ class CreateEventView(UploadView):
         except TimeEventException:
             # to_time е преди from_time
             return render(request, 'error.html', {'error': 'The end of the event is before its start!'})
-            pass
 
-# TODO
-# https://docs.djangoproject.com/en/1.9/topics/class-based-views/intro/

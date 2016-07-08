@@ -1,0 +1,428 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.debounce.min.js"></script>
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.index_ready);
+    </script>
+</head>
+<body class="indexfile">
+
+<div id="header">
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">96%</span>
+        </h1>
+
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+
+        <form id="filter_container">
+            <input id="filter" type="text" value="" placeholder="filter..." />
+        </form>
+    </div>
+</div>
+
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">n</span>
+        <span class="key">s</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        
+        <span class="key">c</span> &nbsp; change column sorting
+    </p>
+    </div>
+</div>
+
+<div id="index">
+    <table class="index">
+        <thead>
+            
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>909</td>
+                <td>36</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="873 909">96%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+            <tr class="file">
+                <td class="name left"><a href="manage_py.html">manage.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday___init___py.html">pyday/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_settings_py.html">pyday/settings.py</a></td>
+                <td>34</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="34 34">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_urls_py.html">pyday/urls.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_views_py.html">pyday/views.py</a></td>
+                <td>16</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 16">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_wsgi_py.html">pyday/wsgi.py</a></td>
+                <td>4</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 4">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms___init___py.html">pyday_alarms/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_admin_py.html">pyday_alarms/admin.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_apps_py.html">pyday_alarms/apps.py</a></td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 3">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_forms_py.html">pyday_alarms/forms.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_models_py.html">pyday_alarms/models.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_pass_info_py.html">pyday_alarms/pass_info.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_services_py.html">pyday_alarms/services.py</a></td>
+                <td>32</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 32">84%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_tests_py.html">pyday_alarms/tests.py</a></td>
+                <td>23</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 23">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_urls_py.html">pyday_alarms/urls.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_alarms_views_py.html">pyday_alarms/views.py</a></td>
+                <td>25</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="24 25">96%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar___init___py.html">pyday_calendar/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_admin_py.html">pyday_calendar/admin.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_apps_py.html">pyday_calendar/apps.py</a></td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 3">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_forms_py.html">pyday_calendar/forms.py</a></td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 9">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_models_py.html">pyday_calendar/models.py</a></td>
+                <td>38</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="37 38">97%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_services_py.html">pyday_calendar/services.py</a></td>
+                <td>21</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="21 21">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_tests_py.html">pyday_calendar/tests.py</a></td>
+                <td>134</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="134 134">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_urls_py.html">pyday_calendar/urls.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_validators_py.html">pyday_calendar/validators.py</a></td>
+                <td>15</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="14 15">93%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_calendar_views_py.html">pyday_calendar/views.py</a></td>
+                <td>71</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="67 71">94%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network___init___py.html">pyday_social_network/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_admin_py.html">pyday_social_network/admin.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_apps_py.html">pyday_social_network/apps.py</a></td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 3">0%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_backends_py.html">pyday_social_network/backends.py</a></td>
+                <td>17</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="14 17">82%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_forms_py.html">pyday_social_network/forms.py</a></td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="15 15">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_models_py.html">pyday_social_network/models.py</a></td>
+                <td>60</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="60 60">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_services_py.html">pyday_social_network/services.py</a></td>
+                <td>46</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="44 46">96%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_tests_py.html">pyday_social_network/tests.py</a></td>
+                <td>189</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="189 189">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_urls_py.html">pyday_social_network/urls.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="pyday_social_network_views_py.html">pyday_social_network/views.py</a></td>
+                <td>97</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="97 97">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="setup_py.html">setup.py</a></td>
+                <td>6</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 6">0%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <p id="no_rows">
+        No items found using the specified filter.
+    </p>
+</div>
+
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.1</a>,
+            created at 2016-07-08 10:56
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

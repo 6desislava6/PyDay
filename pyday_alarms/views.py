@@ -22,13 +22,14 @@ class AlarmView(View):
     # It creates a new alarm and updates all on the raspberry
     @method_decorator(login_required)
     def post(self, request):
-        form = CreateEventForm(request.POST)
+        form = CreateAlarmForm(request.POST)
         if form.is_valid():
             form = form.cleaned_data
             date = form['date'] + timedelta(hours=int(request.POST["hour"]),
                                             minutes=int(request.POST["mins"]))
             Alarm(user=request.user, message=form['message'], date=date).save()
-            update_alarms(request.user)
+            if not update_alarms(request.user):
+                return render(request, 'error.html', {'error': "Raspberry!"})
             return HttpResponseRedirect('/social/main')
         else:
             return render(request, 'error.html', {'error': "Invalid form."})

@@ -10,12 +10,17 @@
 
     <body>
 
-
     <div id="content">
+
         <div id="logo-log">
             <div id="logo">
                 <a href="/social/main"><img  src="{% static "pyday_social_network/images/logo.png" %}" width="400" height="150"></a>
             </div>
+            <form id="search-form" enctype="multipart/form-data" action="/social/search/" method="post">
+                {% csrf_token %}
+                <input type="text" name="searched"/>
+                <input id="search" type="submit" value="🔎" />
+            </form>
             <div id="logout">{% if user_request %}<a id="user-name" href="/social/profile/{{user_request.id}}"><img src="{{user_request.picture.url}}" height="30px" width="30px"></a>
             <a id="logbutton" href="/social/logout">logout</a>
             {% endif %}

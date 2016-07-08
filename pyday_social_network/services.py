@@ -75,3 +75,9 @@ def mapped_user(attribute):
             user = request.user
             users = getattr(user, attribute)
             func'''
+
+
+def search_users(name):
+    users = PyDayUser.objects.all()
+    return list(filter(lambda x: name in x.first_name or name in x.last_name,
+                       users))

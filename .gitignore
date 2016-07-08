@@ -54,4 +54,5 @@ md\~
 pyday_social_network/static/pyday_social_network/images/
 pyday_calendar/static/pyday_calendar/winner.jpg
 pass_info.py
+client_secret.json
 

@@ -103,3 +103,16 @@ input[type="submit"] {
     width: 60%;
     text-align: left;
 }
+#search {
+    display: inline-block;
+    width: 30px;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+}
+#search-form {
+    display: flex;
+    flex-direction:row;
+    align-items: flex-start;
+    height: 44px;
+}
